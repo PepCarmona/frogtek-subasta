@@ -1,5 +1,7 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import BiddingInterface from '@/components/BiddingInterface.vue';
+</script>
 
-<template>Main</template>
-
-<style lang="scss" scoped></style>
+<template>
+  <BiddingInterface />
+</template>
