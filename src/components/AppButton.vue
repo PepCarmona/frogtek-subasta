@@ -22,7 +22,7 @@ button {
     color 200ms,
     background-color 200ms,
     border 200ms;
-  &:focus {
+  &:focus-visible {
     border-radius: 2px;
     outline: 2px solid lightskyblue;
   }
