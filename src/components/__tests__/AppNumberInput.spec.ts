@@ -5,14 +5,14 @@ import AppNumberInput from '../AppNumberInput.vue';
 
 const INPUT_LABEL = 'Test input';
 
-describe('AppButton', () => {
+describe('AppNumberInput', () => {
   const { wrapper, input } = createNumberInputWrapper();
 
   it('creates label element based on prop', () => {
     expect(wrapper.get('label').text()).toBe(INPUT_LABEL);
   });
 
-  it('input number value is always displayed', () => {
+  it('displays input number value', () => {
     input.setValue(10);
     expect(input.element.value).toBe('10');
 
@@ -20,7 +20,7 @@ describe('AppButton', () => {
     expect(input.element.value).toBe('-29');
   });
 
-  it('input string number is never displayed', () => {
+  it('never displays input string number', () => {
     input.setValue('a');
     expect(input.element.value).toBe('');
 

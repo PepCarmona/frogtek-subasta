@@ -8,6 +8,7 @@ const BUTTON_SLOT_TEXT = 'Test Button';
 
 describe('AppButton', () => {
   const wrapper = mount(AppButton, { slots: { default: BUTTON_SLOT_TEXT } });
+  const innerButton = wrapper.get('button');
 
   it('has transparent as default variant', () => {
     expect(wrapper.vm.variant).toBe(AppButtonType.Transparent);
@@ -27,9 +28,16 @@ describe('AppButton', () => {
     expect(wrapper.html()).toContain(BUTTON_SLOT_TEXT);
   });
 
-  it('bubbles inner button events', () => {
-    wrapper.get('button').trigger('click');
+  it('emits inner button click event', () => {
+    innerButton.trigger('click');
 
-    expect(wrapper.emitted('click')).toBeTruthy();
+    expect(wrapper.emitted('click')).toHaveLength(1);
+  });
+
+  it('does not emit inner disabled button click event', () => {
+    innerButton.element.setAttribute('aria-disabled', 'true');
+    innerButton.trigger('click');
+
+    expect(wrapper.emitted('click')).toHaveLength(1);
   });
 });

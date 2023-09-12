@@ -96,7 +96,7 @@ input {
     }
   }
   &.invalid {
-    outline: 1px solid var(--color-error);
+    outline: 1px auto var(--color-error);
     & + label {
       @include focused-label;
       color: var(--color-error);
