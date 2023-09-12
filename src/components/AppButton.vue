@@ -50,9 +50,16 @@ button {
     cursor: not-allowed;
   }
 
+  @mixin onActiveButtonHover {
+    @media (hover: hover) {
+      &:hover:not([aria-disabled='true']) {
+        @content;
+      }
+    }
+  }
   &.transparent {
     background-color: transparent;
-    &:hover:not([aria-disabled='true']) {
+    @include onActiveButtonHover {
       backdrop-filter: brightness(92%);
     }
   }
@@ -60,7 +67,7 @@ button {
     background-color: var(--color-dark);
     color: var(--color-light);
     border: 1px solid var(--color-dark);
-    &:hover:not([aria-disabled='true']) {
+    @include onActiveButtonHover {
       background-color: var(--color-dark-subtle);
       border-color: var(--color-dark-subtle);
     }
@@ -68,7 +75,7 @@ button {
   &.light {
     background-color: var(--color-light);
     border: 1px solid var(--color-dark);
-    &:hover:not([aria-disabled='true']) {
+    @include onActiveButtonHover {
       background-color: var(--color-light-subtle);
     }
   }
