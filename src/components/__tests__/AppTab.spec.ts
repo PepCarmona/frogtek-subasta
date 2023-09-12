@@ -11,11 +11,11 @@ describe('AppTab', () => {
   const wrapper = mount(AppTab, { props: { selected: true }, slots: { default: TAB_SLOT_TEXT } });
   const innerAppButton = wrapper.findComponent(AppButton);
 
-  it('renders inner button with correct type depending on selected prop', async () => {
-    expect(innerAppButton.vm.type).toBe(AppButtonType.Dark);
+  it('renders inner button with correct variant depending on selected prop', async () => {
+    expect(innerAppButton.vm.variant).toBe(AppButtonType.Dark);
 
     await wrapper.setProps({ selected: false });
-    expect(innerAppButton.vm.type).toBe(AppButtonType.Light);
+    expect(innerAppButton.vm.variant).toBe(AppButtonType.Light);
   });
 
   it('renders slot text', () => {

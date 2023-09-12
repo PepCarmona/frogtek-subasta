@@ -9,17 +9,17 @@ const BUTTON_SLOT_TEXT = 'Test Button';
 describe('AppButton', () => {
   const wrapper = mount(AppButton, { slots: { default: BUTTON_SLOT_TEXT } });
 
-  it('has transparent as default type', () => {
-    expect(wrapper.vm.type).toBe(AppButtonType.Transparent);
+  it('has transparent as default variant', () => {
+    expect(wrapper.vm.variant).toBe(AppButtonType.Transparent);
   });
 
-  it('adds classes depending on type', async () => {
+  it('adds classes depending on variant', async () => {
     expect(wrapper.classes()).toContain('transparent');
 
-    await wrapper.setProps({ type: AppButtonType.Dark });
+    await wrapper.setProps({ variant: AppButtonType.Dark });
     expect(wrapper.classes()).toContain('dark');
 
-    await wrapper.setProps({ type: AppButtonType.Light });
+    await wrapper.setProps({ variant: AppButtonType.Light });
     expect(wrapper.classes()).toContain('light');
   });
 

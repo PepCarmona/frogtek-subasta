@@ -2,13 +2,13 @@
 import { AppButtonType } from './AppButton.types';
 
 interface AppButtonProps {
-  type: AppButtonType;
+  variant: AppButtonType;
 }
-const props = withDefaults(defineProps<AppButtonProps>(), { type: AppButtonType.Transparent });
+const props = withDefaults(defineProps<AppButtonProps>(), { variant: AppButtonType.Transparent });
 </script>
 
 <template>
-  <button :class="props.type">
+  <button :class="props.variant">
     <slot />
   </button>
 </template>

@@ -15,7 +15,7 @@ const emit = defineEmits<AppTabEmits>();
 
 <template>
   <AppButton
-    :type="props.selected ? AppButtonType.Dark : AppButtonType.Light"
+    :variant="props.selected ? AppButtonType.Dark : AppButtonType.Light"
     role="tab"
     @click="emit('select')"
   >
