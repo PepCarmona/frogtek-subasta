@@ -19,12 +19,12 @@ button {
   padding: 5px 10px;
   cursor: pointer;
   transition:
-    color 200ms,
-    background-color 200ms,
-    border 200ms;
+    color 200ms ease,
+    background-color 200ms ease,
+    border 200ms ease;
   &:focus-visible {
     border-radius: 2px;
-    outline: 2px solid lightskyblue;
+    outline: 2px solid var(--color-highlight);
   }
 
   &.transparent {
@@ -34,19 +34,19 @@ button {
     }
   }
   &.dark {
-    background-color: black;
-    color: white;
-    border: 1px solid black;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    border: 1px solid var(--color-dark);
     &:hover {
-      background-color: gray;
-      border-color: gray;
+      background-color: var(--color-dark-subtle);
+      border-color: var(--color-dark-subtle);
     }
   }
   &.light {
-    background-color: white;
-    border: 1px solid black;
+    background-color: var(--color-light);
+    border: 1px solid var(--color-dark);
     &:hover {
-      background-color: lightgray;
+      background-color: var(--color-light-subtle);
     }
   }
 }

@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+  font-family: var(--font-main);
+  color: var(--color-main);
+}
+
+:root {
+  --color-dark: black;
+  --color-dark-subtle: gray;
+  --color-light: white;
+  --color-light-subtle: lightgray;
+  --color-highlight: lightskyblue;
+  --color-error: rgb(231, 3, 3);
+
+  --font-main: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
