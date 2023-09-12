@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils';
 import BiddingActions from '../BiddingActions.vue';
-import { AuctionUser } from '@/stores/selectedUser';
+import { AuctionUser } from '@/stores/selectedUserStore';
 import AppNumberInput from '../AppNumberInput.vue';
 import AppButton from '../AppButton.vue';
 

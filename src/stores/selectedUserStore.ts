@@ -6,7 +6,7 @@ export enum AuctionUser {
   Seller = 'vendedor'
 }
 
-export const useAuctionUserStore = defineStore('auctionUserStore', () => {
+export const useSelectedUserStore = defineStore('selectedUserStore', () => {
   const selectedUser = ref<AuctionUser>(AuctionUser.Buyer);
 
   function selectUser(auctionUser: AuctionUser): void {

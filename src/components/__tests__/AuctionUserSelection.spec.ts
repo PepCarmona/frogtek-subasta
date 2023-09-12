@@ -3,9 +3,8 @@ import { describe, it, expect, vitest } from 'vitest';
 import { mount } from '@vue/test-utils';
 import AuctionUserSelection from '../AuctionUserSelection.vue';
 import AppTab from '../AppTab.vue';
-import { AuctionUser } from '@/stores/selectedUser';
+import { AuctionUser, useSelectedUserStore } from '@/stores/selectedUserStore';
 import { createTestingPinia } from '@pinia/testing';
-import { useAuctionUserStore } from '@/stores/selectedUser';
 
 describe('AuctionUserSelection', () => {
   const wrapper = mount(AuctionUserSelection, {
@@ -14,7 +13,7 @@ describe('AuctionUserSelection', () => {
 
   const innerAppTabs = wrapper.findAllComponents(AppTab);
 
-  const selectedUserStore = useAuctionUserStore();
+  const selectedUserStore = useSelectedUserStore();
 
   it('renders a tab for every AuctionUser', () => {
     expect(innerAppTabs).toHaveLength(Object.keys(AuctionUser).length);

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useAuctionUserStore } from '@/stores/selectedUser';
+import { useSelectedUserStore } from '@/stores/selectedUserStore';
 import AuctionUserSelection from './AuctionUserSelection.vue';
 import BiddingActions from './BiddingActions.vue';
 import { storeToRefs } from 'pinia';
 
-const selectedUserStore = useAuctionUserStore();
+const selectedUserStore = useSelectedUserStore();
 const { selectedUser } = storeToRefs(selectedUserStore);
 </script>
 

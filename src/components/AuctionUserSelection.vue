@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { AuctionUser, useAuctionUserStore } from '@/stores/selectedUser';
+import { AuctionUser, useSelectedUserStore } from '@/stores/selectedUserStore';
 import AppTab from './AppTab.vue';
 
-const { selectUser, isSelectedUser, getAuctionUserName } = useAuctionUserStore();
+const { selectUser, isSelectedUser, getAuctionUserName } = useSelectedUserStore();
 </script>
 
 <template>

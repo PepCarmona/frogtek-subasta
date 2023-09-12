@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { AuctionUser } from '@/stores/selectedUser';
+import { AuctionUser } from '@/stores/selectedUserStore';
 import AppButton from './AppButton.vue';
 import AppNumberInput from './AppNumberInput.vue';
 import { computed, ref } from 'vue';
