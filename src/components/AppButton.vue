@@ -35,18 +35,23 @@ function preventClickWhenDisabled(event: Event): void {
 <style lang="scss" scoped>
 button {
   border: none;
-  padding: 5px 10px;
+  padding: 16px;
+  background-color: transparent;
   cursor: pointer;
   transition:
-    color 200ms ease,
-    background-color 200ms ease,
-    border 200ms ease;
+    color 300ms ease,
+    background-color 300ms ease,
+    box-shadow 300ms ease,
+    opacity 300ms ease,
+    backdrop-filter 300ms ease;
   &:focus-visible {
-    border-radius: 2px;
     outline: 2px solid var(--color-highlight);
+    &.highlight {
+      outline: 2px solid var(--color-light);
+    }
   }
   &[aria-disabled='true'] {
-    opacity: 40%;
+    opacity: 15%;
     cursor: not-allowed;
   }
 
@@ -60,23 +65,24 @@ button {
   &.transparent {
     background-color: transparent;
     @include onActiveButtonHover {
-      backdrop-filter: brightness(92%);
+      backdrop-filter: brightness(85%);
     }
   }
   &.dark {
-    background-color: var(--color-dark);
-    color: var(--color-light);
-    border: 1px solid var(--color-dark);
+    backdrop-filter: brightness(60%);
     @include onActiveButtonHover {
-      background-color: var(--color-dark-subtle);
-      border-color: var(--color-dark-subtle);
+      backdrop-filter: brightness(80%);
     }
   }
-  &.light {
-    background-color: var(--color-light);
-    border: 1px solid var(--color-dark);
+
+  &.highlight {
+    background-color: var(--color-highlight);
+    color: var(--color-dark);
+    &:not([aria-disabled='true']) {
+      box-shadow: 0px 2px 8px -4px var(--color-highlight);
+    }
     @include onActiveButtonHover {
-      background-color: var(--color-light-subtle);
+      background-color: var(--color-highlight-subtle);
     }
   }
 }

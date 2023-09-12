@@ -1,16 +1,20 @@
 * {
   box-sizing: border-box;
   font-family: var(--font-main);
-  color: var(--color-main);
+  color: var(--color-light);
+}
+
+body {
+  margin: 0;
 }
 
 :root {
-  --color-dark: black;
-  --color-dark-subtle: gray;
-  --color-light: white;
-  --color-light-subtle: lightgray;
-  --color-highlight: lightskyblue;
-  --color-error: rgb(231, 3, 3);
+  --color-dark: #121212;
+  --color-dark-subtle: #1b1b1b;
+  --color-light: #98938e;
+  --color-highlight: #e2b378;
+  --color-highlight-subtle: #ce9b5d;
+  --color-error: rgb(187, 0, 0);
 
   --font-main: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

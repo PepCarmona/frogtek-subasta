@@ -15,7 +15,7 @@ describe('AppTab', () => {
     expect(innerAppButton.vm.variant).toBe(AppButtonType.Dark);
 
     await wrapper.setProps({ selected: false });
-    expect(innerAppButton.vm.variant).toBe(AppButtonType.Light);
+    expect(innerAppButton.vm.variant).toBe(AppButtonType.Transparent);
   });
 
   it('renders slot text', () => {

@@ -28,6 +28,7 @@ export const useAuctionUserStore = defineStore('auctionUserStore', () => {
   }
 
   return {
+    selectedUser,
     selectUser,
     isSelectedUser,
     getAuctionUserName

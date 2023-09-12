@@ -54,37 +54,45 @@ function handleInput(event: Event): void {
 .number-input {
   position: relative;
   padding-top: 10px;
+  padding-bottom: 24px;
 }
 
 label {
   position: absolute;
-  top: 19px;
+  top: 28px;
   left: 20px;
-  color: var(--color-dark-subtle);
-  font-weight: bold;
-  line-height: 1.1;
+  color: var(--color-light);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
   cursor: text;
   transition: all 200ms ease;
 }
 
 @mixin focused-label {
-  top: 3px;
-  background-color: var(--color-light);
+  top: -8px;
   padding: 0 5px;
-  left: 16px;
+  left: 12px;
   font-size: 14px;
 }
 
 input {
   display: block;
-  padding: 10px;
+  background-color: var(--color-dark-subtle);
+  color: var(--color-highlight);
+  font-weight: 600;
+  font-size: 24px;
+  padding: 16px;
   width: 100%;
+  border: none;
+  border-radius: 16px;
   appearance: textfield;
   &::-webkit-inner-spin-button {
-    appearance: none;
+    -webkit-appearance: none;
   }
-  &:focus {
-    outline-color: var(--color-highlight);
+  &:focus,
+  &:focus-visible {
+    outline: 1px solid var(--color-highlight);
     & + label {
       @include focused-label;
       color: var(--color-highlight);
@@ -96,7 +104,7 @@ input {
     }
   }
   &.invalid {
-    outline: 1px auto var(--color-error);
+    outline: 1px solid var(--color-error);
     & + label {
       @include focused-label;
       color: var(--color-error);
@@ -105,8 +113,11 @@ input {
 }
 
 .validation-error {
+  position: absolute;
+  display: block;
+  left: 16px;
+  top: 72px;
   color: var(--color-error);
   font-size: 14px;
-  margin-left: 5px;
 }
 </style>

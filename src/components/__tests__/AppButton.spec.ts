@@ -20,8 +20,8 @@ describe('AppButton', () => {
     await wrapper.setProps({ variant: AppButtonType.Dark });
     expect(wrapper.classes()).toContain('dark');
 
-    await wrapper.setProps({ variant: AppButtonType.Light });
-    expect(wrapper.classes()).toContain('light');
+    await wrapper.setProps({ variant: AppButtonType.Highlight });
+    expect(wrapper.classes()).toContain('highlight');
   });
 
   it('renders slot text', () => {

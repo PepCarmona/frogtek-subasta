@@ -3,6 +3,7 @@ import { AuctionUser } from '@/stores/selectedUser';
 import AppButton from './AppButton.vue';
 import AppNumberInput from './AppNumberInput.vue';
 import { computed, ref } from 'vue';
+import { AppButtonType } from './AppButton.types';
 
 interface BiddingActionsProps {
   selectedUser: AuctionUser;
@@ -49,8 +50,22 @@ function emitAmount(): void {
       @input="amount = $event"
       @check-validity="isValidInput = $event"
     />
-    <AppButton type="submit" :aria-disabled="!isValidInput"> Enviar </AppButton>
+    <AppButton
+      class="bid-button"
+      type="submit"
+      :aria-disabled="!isValidInput"
+      :variant="AppButtonType.Highlight"
+    >
+      Enviar
+    </AppButton>
   </form>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bid-button {
+  width: 100%;
+  border-radius: 16px;
+  font-size: 20px;
+  font-weight: 800;
+}
+</style>
