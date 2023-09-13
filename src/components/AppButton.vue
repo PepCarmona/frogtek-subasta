@@ -51,7 +51,7 @@ button {
     }
   }
   &[aria-disabled='true'] {
-    opacity: 15%;
+    opacity: 35%;
     cursor: not-allowed;
   }
 
@@ -69,10 +69,7 @@ button {
     }
   }
   &.dark {
-    backdrop-filter: brightness(60%);
-    @include onActiveButtonHover {
-      backdrop-filter: brightness(80%);
-    }
+    background-color: var(--color-dark);
   }
 
   &.highlight {

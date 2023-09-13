@@ -8,27 +8,23 @@ interface AppNumberInputProps {
 const props = defineProps<AppNumberInputProps>();
 
 interface AppNumberInputEmits {
-  (eventName: 'input', eventValue: number): void;
+  (eventName: 'input', eventValue?: number): void;
   (eventName: 'check-validity', eventValue: boolean): void;
 }
 const emit = defineEmits<AppNumberInputEmits>();
 
-const isInvalidValue = ref<boolean>(false);
 const validationError = ref<string>();
 
 function handleInput(event: Event): void {
   const input = event.target as HTMLInputElement;
-  const eventNumberValue = input.valueAsNumber;
+
   const isValid = input.checkValidity();
-  isInvalidValue.value = !isValid;
   emit('check-validity', isValid);
 
-  if (isInvalidValue.value) {
-    validationError.value = input.validationMessage;
-  } else {
-    validationError.value = undefined;
-    emit('input', eventNumberValue);
-  }
+  const eventNumberValue = isValid ? input.valueAsNumber : undefined;
+  emit('input', eventNumberValue);
+
+  validationError.value = isValid ? undefined : input.validationMessage;
 }
 </script>
 
@@ -37,7 +33,7 @@ function handleInput(event: Event): void {
     <input
       :id="props.id"
       type="number"
-      :class="{ invalid: isInvalidValue }"
+      :class="{ invalid: validationError }"
       min="0"
       step="0.01"
       required

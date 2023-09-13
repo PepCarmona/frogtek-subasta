@@ -29,18 +29,18 @@ describe('AppNumberInput', () => {
   });
 
   it('emits valid number input value', () => {
-    const { wrapper: tempWrapper } = createNumberInputWrapper();
+    const { wrapper: tempWrapper, input: tempInput } = createNumberInputWrapper();
 
-    tempWrapper.get('input').setValue(10);
+    tempInput.setValue(10);
     expect(tempWrapper.emitted('input')).toHaveLength(1);
   });
 
-  it('does not emit invalid input value', () => {
+  it('emits undefined when invalid input value', () => {
     const { wrapper: tempWrapper, input: tempInput } = createNumberInputWrapper();
 
     tempInput.setValue('a');
     tempInput.setValue(-10);
-    expect(tempWrapper.emitted('input')).toBeFalsy();
+    expect(tempWrapper.emitted('input')).toEqual([[undefined], [undefined]]);
   });
 
   it('displays validation error when modified input is invalid', async () => {
