@@ -3,9 +3,9 @@ import './assets/main.scss';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
-import App from './App.vue';
+import MainView from './views/MainView.vue';
 
-const app = createApp(App);
+const app = createApp(MainView);
 
 app.use(createPinia());
 

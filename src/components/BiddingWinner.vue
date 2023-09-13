@@ -1,14 +1,15 @@
 <script lang="ts" setup>
 import { AuctionUser } from '@/stores/selectedUserStore';
-import { computed } from 'vue';
+import { computed, onUnmounted } from 'vue';
 import AppButton from './AppButton.vue';
 import { AppButtonType } from './AppButton.types';
+import { useWeatherStore } from '@/stores/weatherStore';
+import { storeToRefs } from 'pinia';
 
 interface BiddingWinnerProps {
   auctionWinner: AuctionUser;
   buyerPrice: number;
   sellerPrice: number;
-  temperature: number;
 }
 const props = defineProps<BiddingWinnerProps>();
 
@@ -17,9 +18,17 @@ interface BiddingWinnerEmits {
 }
 const emit = defineEmits<BiddingWinnerEmits>();
 
+const weatherStore = useWeatherStore();
+const { fetchWeatherReport, clearWeatherData } = weatherStore;
+const { isLoading, temperature, weatherLocation } = storeToRefs(weatherStore);
+
+fetchWeatherReport();
+
 const winnerTitle = computed(() =>
   props.auctionWinner === AuctionUser.Buyer ? '¡Enhorabuena!' : 'No ha habido trato'
 );
+
+onUnmounted(() => clearWeatherData());
 </script>
 
 <template>
@@ -41,9 +50,9 @@ const winnerTitle = computed(() =>
         Reset
       </AppButton>
     </section>
-    <section class="temperature">
-      <p>
-        La temperatura en Huesca es de <b>{{ props.temperature }}ºC</b>
+    <section class="temperature" :class="{ loading: isLoading }">
+      <p v-if="!isLoading && weatherLocation && temperature">
+        La temperatura en {{ weatherLocation }} es de <b>{{ temperature }}ºC</b>
       </p>
     </section>
   </div>
@@ -78,6 +87,13 @@ const winnerTitle = computed(() =>
 
   & > .temperature {
     font-size: 14px;
+    &.loading {
+      height: 18px;
+      width: 200px;
+      margin: 0 14px;
+      background-color: var(--color-dark-subtle);
+      border-radius: 16px;
+    }
   }
 }
 </style>
