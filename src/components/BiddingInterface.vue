@@ -3,9 +3,13 @@ import { useSelectedUserStore } from '@/stores/selectedUserStore';
 import AuctionUserSelection from './AuctionUserSelection.vue';
 import BiddingActions from './BiddingActions.vue';
 import { storeToRefs } from 'pinia';
+import { useAuctionStore } from '@/stores/auctionStore';
 
 const selectedUserStore = useSelectedUserStore();
 const { selectedUser } = storeToRefs(selectedUserStore);
+
+const auctionStore = useAuctionStore();
+const { buyerPrice, sellerPrice } = storeToRefs(auctionStore);
 </script>
 
 <template>
@@ -13,7 +17,14 @@ const { selectedUser } = storeToRefs(selectedUserStore);
     <AuctionUserSelection class="user-selection" />
     <div class="bidding-actions">
       <Transition name="fade">
-        <BiddingActions :key="selectedUser" :selected-user="selectedUser" />
+        <BiddingActions
+          :key="selectedUser"
+          :selected-user="selectedUser"
+          :buyer-price="buyerPrice"
+          :seller-price="sellerPrice"
+          @send-buyer-price="buyerPrice = $event"
+          @send-seller-price="sellerPrice = $event"
+        />
       </Transition>
     </div>
   </div>

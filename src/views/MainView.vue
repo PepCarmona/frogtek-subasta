@@ -1,10 +1,27 @@
 <script lang="ts" setup>
 import BiddingInterface from '@/components/BiddingInterface.vue';
+import BiddingWinner from '@/components/BiddingWinner.vue';
+import { useAuctionStore } from '@/stores/auctionStore';
+import { storeToRefs } from 'pinia';
+
+const auctionStore = useAuctionStore();
+const { auctionWinner, buyerPrice, sellerPrice } = storeToRefs(auctionStore);
+const { resetAuction } = auctionStore;
 </script>
 
 <template>
   <main class="main-view">
     <BiddingInterface />
+    <Transition name="fade-down">
+      <BiddingWinner
+        v-if="auctionWinner && buyerPrice && sellerPrice"
+        :auction-winner="auctionWinner"
+        :buyer-price="buyerPrice"
+        :seller-price="sellerPrice"
+        :temperature="32"
+        @reset="resetAuction"
+      />
+    </Transition>
   </main>
 </template>
 
@@ -30,5 +47,24 @@ import BiddingInterface from '@/components/BiddingInterface.vue';
     background-size: cover;
     filter: blur(50px) saturate(90%) brightness(95%);
   }
+}
+
+.fade-down-enter-active,
+.fade-down-leave-active {
+  transition: all 300ms;
+}
+
+.fade-down-enter-from {
+  transform: translateY(-100px);
+  opacity: 0;
+}
+.fade-down-leave-to {
+  transform: translateY(-100px);
+  opacity: 0;
+}
+
+.fade-down-enter-to,
+.fade-down-leave-from {
+  opacity: 1;
 }
 </style>

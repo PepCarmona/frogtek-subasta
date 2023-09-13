@@ -7,6 +7,8 @@ import { AppButtonType } from './AppButton.types';
 
 interface BiddingActionsProps {
   selectedUser: AuctionUser;
+  buyerPrice: number | null;
+  sellerPrice: number | null;
 }
 const props = defineProps<BiddingActionsProps>();
 
@@ -25,6 +27,12 @@ const moneyInputLabel = computed(() =>
   props.selectedUser === AuctionUser.Buyer ? buyerInputLabel : sellerInputLabel
 );
 
+const currentPrice = computed(() =>
+  props.selectedUser === AuctionUser.Buyer
+    ? { amount: props.buyerPrice, label: `última puja` }
+    : { amount: props.sellerPrice, label: `último precio` }
+);
+
 function emitAmount(): void {
   if (amount.value === undefined) {
     throw Error('Can not emit undefined amount');
@@ -39,6 +47,8 @@ function emitAmount(): void {
       emit('send-seller-price', amount.value);
       break;
   }
+
+  amount.value = null;
 }
 </script>
 
@@ -56,7 +66,10 @@ function emitAmount(): void {
       :aria-disabled="!isValidInput"
       :variant="AppButtonType.Highlight"
     >
-      Enviar
+      {{ currentPrice.amount ? 'Modificar' : 'Enviar' }}
+      <span v-if="currentPrice.amount" class="current-price">
+        ({{ currentPrice.label }}: <b>{{ currentPrice.amount }}€</b>)
+      </span>
     </AppButton>
   </form>
 </template>
@@ -67,5 +80,13 @@ function emitAmount(): void {
   border-radius: 16px;
   font-size: 20px;
   font-weight: 800;
+}
+.current-price {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-dark);
+  & b {
+    color: var(--color-dark);
+  }
 }
 </style>

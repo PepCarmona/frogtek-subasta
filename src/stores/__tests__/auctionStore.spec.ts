@@ -9,8 +9,8 @@ describe('selectedUserStore', () => {
   const { auctionWinner, buyerPrice, sellerPrice } = storeToRefs(auctionStore);
 
   it('has no amounts by default', () => {
-    expect(buyerPrice.value).toBeUndefined();
-    expect(sellerPrice.value).toBeUndefined();
+    expect(buyerPrice.value).toBe(null);
+    expect(sellerPrice.value).toBe(null);
   });
 
   it('has no winner when one of the amounts is not defined', () => {
@@ -19,7 +19,7 @@ describe('selectedUserStore', () => {
     buyerPrice.value = 20;
     expect(auctionWinner.value).toBeUndefined();
 
-    buyerPrice.value = undefined;
+    buyerPrice.value = null;
     sellerPrice.value = 20;
     expect(auctionWinner.value).toBeUndefined();
   });

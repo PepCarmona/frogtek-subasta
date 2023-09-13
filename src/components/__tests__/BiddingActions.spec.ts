@@ -62,7 +62,7 @@ function createBiddingActionsWrapper(): {
   innerButton: Omit<DOMWrapper<HTMLButtonElement>, 'exists'>;
 } {
   const wrapper = mount(BiddingActions, {
-    props: { selectedUser: AuctionUser.Buyer }
+    props: { selectedUser: AuctionUser.Buyer, buyerPrice: null, sellerPrice: null }
   });
 
   const innerInput = wrapper.getComponent(AppNumberInput).get('input');

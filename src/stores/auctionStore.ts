@@ -14,9 +14,15 @@ export const useAuctionStore = defineStore('auctionStore', () => {
     return buyerPrice.value >= sellerPrice.value ? AuctionUser.Buyer : AuctionUser.Seller;
   });
 
+  function resetAuction(): void {
+    buyerPrice.value = null;
+    sellerPrice.value = null;
+  }
+
   return {
     buyerPrice,
     sellerPrice,
-    auctionWinner
+    auctionWinner,
+    resetAuction
   };
 });

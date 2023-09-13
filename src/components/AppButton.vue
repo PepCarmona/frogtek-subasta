@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { AppButtonType } from './AppButton.types';
 
 interface AppButtonProps {
   variant?: AppButtonType;
+  focus?: boolean;
 }
 const props = withDefaults(defineProps<AppButtonProps>(), { variant: AppButtonType.Transparent });
 
@@ -24,6 +25,12 @@ function preventClickWhenDisabled(event: Event): void {
     emit('click');
   }
 }
+
+onMounted(() => {
+  if (props.focus && button.value) {
+    button.value.focus();
+  }
+});
 </script>
 
 <template>

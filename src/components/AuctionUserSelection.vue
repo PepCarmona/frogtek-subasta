@@ -1,8 +1,15 @@
 <script lang="ts" setup>
 import { AuctionUser, useSelectedUserStore } from '@/stores/selectedUserStore';
 import AppTab from './AppTab.vue';
+import { useAuctionStore } from '@/stores/auctionStore';
+import { storeToRefs } from 'pinia';
 
 const { selectUser, isSelectedUser, getAuctionUserName } = useSelectedUserStore();
+const { buyerPrice, sellerPrice } = storeToRefs(useAuctionStore());
+
+function hasUserPrice(user: AuctionUser): boolean {
+  return user === AuctionUser.Buyer ? buyerPrice.value !== null : sellerPrice.value !== null;
+}
 </script>
 
 <template>
@@ -11,7 +18,7 @@ const { selectUser, isSelectedUser, getAuctionUserName } = useSelectedUserStore(
       v-for="user in AuctionUser"
       :key="user"
       class="tab"
-      :class="{ selected: isSelectedUser(user) }"
+      :class="{ selected: isSelectedUser(user), pending: !hasUserPrice(user) }"
       :selected="isSelectedUser(user)"
       @select="selectUser(user)"
     >
@@ -29,12 +36,24 @@ const { selectUser, isSelectedUser, getAuctionUserName } = useSelectedUserStore(
   gap: 8px;
 }
 .tab {
+  position: relative;
   width: 100%;
   border-radius: 12px;
   font-size: 16px;
   &.selected {
     font-weight: 600;
     color: var(--color-highlight);
+  }
+
+  &.pending::after {
+    content: '';
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    border-radius: 8px;
+    background-color: var(--color-highlight);
+    top: 8px;
+    right: 8px;
   }
 }
 </style>
