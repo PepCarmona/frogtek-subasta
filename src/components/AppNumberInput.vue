@@ -4,11 +4,12 @@ import { ref } from 'vue';
 interface AppNumberInputProps {
   id: string;
   label: string;
+  modelValue: number | null;
 }
 const props = defineProps<AppNumberInputProps>();
 
 interface AppNumberInputEmits {
-  (eventName: 'input', eventValue?: number): void;
+  (eventName: 'update:modelValue', eventValue: number | null): void;
   (eventName: 'check-validity', eventValue: boolean): void;
 }
 const emit = defineEmits<AppNumberInputEmits>();
@@ -21,8 +22,8 @@ function handleInput(event: Event): void {
   const isValid = input.checkValidity();
   emit('check-validity', isValid);
 
-  const eventNumberValue = isValid ? input.valueAsNumber : undefined;
-  emit('input', eventNumberValue);
+  const eventNumberValue = isValid ? input.valueAsNumber : null;
+  emit('update:modelValue', eventNumberValue);
 
   validationError.value = isValid ? undefined : input.validationMessage;
 }
@@ -33,6 +34,7 @@ function handleInput(event: Event): void {
     <input
       :id="props.id"
       type="number"
+      :value="props.modelValue"
       :class="{ invalid: validationError }"
       min="0"
       step="0.01"

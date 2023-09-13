@@ -11,12 +11,12 @@ interface BiddingActionsProps {
 const props = defineProps<BiddingActionsProps>();
 
 interface BiddingActionsEmits {
-  (eventName: 'send-buyer-price', value: number): void;
-  (eventName: 'send-seller-price', value: number): void;
+  (eventName: 'send-buyer-price', value: number | null): void;
+  (eventName: 'send-seller-price', value: number | null): void;
 }
 const emit = defineEmits<BiddingActionsEmits>();
 
-const amount = ref<number>();
+const amount = ref<number | null>(null);
 const isValidInput = ref<boolean>(false);
 
 const buyerInputLabel = 'Puja máxima';
@@ -46,8 +46,8 @@ function emitAmount(): void {
   <form @submit.prevent="emitAmount">
     <AppNumberInput
       id="money-input"
+      v-model="amount"
       :label="moneyInputLabel"
-      @input="amount = $event"
       @check-validity="isValidInput = $event"
     />
     <AppButton

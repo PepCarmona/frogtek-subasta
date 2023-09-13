@@ -11,7 +11,11 @@ const { selectedUser } = storeToRefs(selectedUserStore);
 <template>
   <div class="bidding-interface">
     <AuctionUserSelection class="user-selection" />
-    <BiddingActions class="bidding-actions" :selected-user="selectedUser" />
+    <div class="bidding-actions">
+      <Transition name="fade">
+        <BiddingActions :key="selectedUser" :selected-user="selectedUser" />
+      </Transition>
+    </div>
   </div>
 </template>
 
@@ -31,5 +35,35 @@ const { selectedUser } = storeToRefs(selectedUserStore);
   & > .user-selection {
     display: flex;
   }
+
+  & > .bidding-actions {
+    position: relative;
+  }
+}
+
+.fade-enter-active {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  transition: opacity 300ms ease-in 100ms;
+}
+.fade-leave-active {
+  transition:
+    opacity 150ms ease-in,
+    transform 400ms;
+}
+
+.fade-enter-from {
+  left: -240px;
+  opacity: 0;
+}
+.fade-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 </style>

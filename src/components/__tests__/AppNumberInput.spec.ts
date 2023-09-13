@@ -32,15 +32,15 @@ describe('AppNumberInput', () => {
     const { wrapper: tempWrapper, input: tempInput } = createNumberInputWrapper();
 
     tempInput.setValue(10);
-    expect(tempWrapper.emitted('input')).toHaveLength(1);
+    expect(tempWrapper.emitted('update:modelValue')).toHaveLength(1);
   });
 
-  it('emits undefined when invalid input value', () => {
+  it('emits null when invalid input value', () => {
     const { wrapper: tempWrapper, input: tempInput } = createNumberInputWrapper();
 
     tempInput.setValue('a');
     tempInput.setValue(-10);
-    expect(tempWrapper.emitted('input')).toEqual([[undefined], [undefined]]);
+    expect(tempWrapper.emitted('update:modelValue')).toEqual([[null], [null]]);
   });
 
   it('displays validation error when modified input is invalid', async () => {
@@ -95,7 +95,7 @@ function createNumberInputWrapper(): {
   input: Omit<DOMWrapper<HTMLInputElement>, 'exists'>;
 } {
   const wrapper = mount(AppNumberInput, {
-    props: { id: 'test-number-input', label: INPUT_LABEL }
+    props: { id: 'test-number-input', label: INPUT_LABEL, modelValue: null }
   });
 
   const input = wrapper.get('input');

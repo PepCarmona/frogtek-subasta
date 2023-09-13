@@ -3,8 +3,8 @@ import { computed, ref } from 'vue';
 import { AuctionUser } from './selectedUserStore';
 
 export const useAuctionStore = defineStore('auctionStore', () => {
-  const buyerPrice = ref<number>();
-  const sellerPrice = ref<number>();
+  const buyerPrice = ref<number | null>(null);
+  const sellerPrice = ref<number | null>(null);
 
   const auctionWinner = computed(() => {
     if (!buyerPrice.value || !sellerPrice.value) {
